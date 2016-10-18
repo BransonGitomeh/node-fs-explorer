@@ -6,4 +6,4 @@ $ npm install
 $ npm start
 ```
 
-![it can show the contents of folders](/pics/1?raw=true "showing the contents of a folder")
+![it can show the contents of folders](/pics/1.jpeg?raw=true "showing the contents of a folder")
