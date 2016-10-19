@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser')
+var fs = require("fs")
+var assert = require("assert")
 
 app.use(express.static("."))
 
@@ -14,11 +16,12 @@ app.use(bodyParser.json())
 
 // respond with "hello world" when a GET request is made to the homepage
 app.post('/files', function(req, res) {
-    console.log(req.body)
     fs.readdir(req.body.path, function(err, flist) {
+        console.log(req.body, "reading as directoty", err)
         if (err) {
             // check if the url leads to a file
             fs.readFile(req.body.path, 'utf8', function(err, data) {
+                console.log(req.body, "reading as file", err)
                 if (err) {
                     return console.log(err);
                 }
@@ -38,10 +41,9 @@ app.post('/files', function(req, res) {
     })
 });
 
-function log(argument) {
-    console.log(argument)
+function log(err) {
+    assert.ifError(err)
+    console.log("server started @3000")
 }
 
 app.listen("3000", log)
-
-var fs = require("fs")
